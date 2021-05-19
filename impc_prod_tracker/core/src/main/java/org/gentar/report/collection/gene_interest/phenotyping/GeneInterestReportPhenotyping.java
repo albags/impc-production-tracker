@@ -114,9 +114,9 @@ public class GeneInterestReportPhenotyping {
                 .stream()
 //                .collect(Collectors.toMap(GeneInterestReportPhenotypingAttemptProjection::getProjectTpn,
 //                        e -> fetchGenesByOutcomeId(e.getOutcomeId())));
-        .collect(Collectors.groupingBy(
-                GeneInterestReportPhenotypingAttemptProjection::getProjectTpn,
-                Collectors.mapping(e -> fetchGenesByOutcomeId(e.getOutcomeId()), Collectors.toSet())));
+                .collect(Collectors.groupingBy(
+                        GeneInterestReportPhenotypingAttemptProjection::getProjectTpn,
+                        Collectors.mapping(e -> fetchGenesByOutcomeId(e.getOutcomeId()), Collectors.toSet())));
 
     }
 

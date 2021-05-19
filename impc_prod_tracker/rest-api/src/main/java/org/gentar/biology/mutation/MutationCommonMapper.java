@@ -1,6 +1,5 @@
 package org.gentar.biology.mutation;
 
-import org.gentar.EntityMapper;
 import org.gentar.Mapper;
 import org.gentar.biology.mutation.genetic_type.GeneticMutationType;
 import org.gentar.biology.mutation.molecular_type.MolecularMutationType;
@@ -38,22 +37,25 @@ public class MutationCommonMapper implements Mapper<Mutation, MutationCommonDTO>
     public MutationCommonDTO toDto(Mutation mutation)
     {
         MutationCommonDTO mutationCommonDTO = new MutationCommonDTO();
+
         mutationCommonDTO.setSymbol(mutation.getSymbol());
         mutationCommonDTO.setDescription(mutation.getDescription());
         mutationCommonDTO.setMgiAlleleSymbolRequiresConstruction(mutation.getMgiAlleleSymbolRequiresConstruction());
+        mutationCommonDTO.setAlleleConfirmed(mutation.getAlleleConfirmed());
         if (mutation.getGeneticMutationType() != null) {
             mutationCommonDTO.setGeneticMutationTypeName(mutation.getGeneticMutationType().getName());
         }
         if (mutation.getMolecularMutationType() != null) {
             mutationCommonDTO.setMolecularMutationTypeName(mutation.getMolecularMutationType().getName());
         }
-        mutationCommonDTO.setAlleleConfirmed(mutation.getAlleleConfirmed());
+
         mutationCommonDTO.setMutationQCResultDTOs(
             mutationQCResultMapper.toDtos(mutation.getMutationQcResults()));
         mutationCommonDTO.setMutationSequenceDTOS(
             mutationSequenceMapper.toDtos(mutation.getMutationSequences()));
         mutationCommonDTO.setMutationCategorizationDTOS(
             mutationCategorizationMapper.toDtos(mutation.getMutationCategorizations()));
+
         return mutationCommonDTO;
     }
 
@@ -68,13 +70,14 @@ public class MutationCommonMapper implements Mapper<Mutation, MutationCommonDTO>
             mutation.setMgiAlleleSymbolRequiresConstruction(
                 mutationCommonDTO.getMgiAlleleSymbolRequiresConstruction());
             mutation.setDescription(mutationCommonDTO.getDescription());
+            mutation.setMutationCategorizations(
+                    new HashSet<>(mutationCategorizationMapper.toEntities(
+                            mutationCommonDTO.getMutationCategorizationDTOS())));
+
             setGeneticMutationType(mutation, mutationCommonDTO);
             setMolecularMutationType(mutation, mutationCommonDTO);
             setMutationQcResults(mutation, mutationCommonDTO);
             setMutationSequences(mutation, mutationCommonDTO);
-            mutation.setMutationCategorizations(
-                new HashSet<>(mutationCategorizationMapper.toEntities(
-                    mutationCommonDTO.getMutationCategorizationDTOS())));
         }
         return mutation;
     }

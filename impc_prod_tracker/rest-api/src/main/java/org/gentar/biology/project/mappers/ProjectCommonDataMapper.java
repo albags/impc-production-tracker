@@ -1,6 +1,5 @@
 package org.gentar.biology.project.mappers;
 
-import org.gentar.EntityMapper;
 import org.gentar.Mapper;
 import org.gentar.biology.project.Project;
 import org.gentar.biology.project.ProjectCommonDataDTO;
@@ -15,8 +14,7 @@ public class ProjectCommonDataMapper implements Mapper<Project, ProjectCommonDat
 {
     private PrivacyMapper privacyMapper;
 
-    public ProjectCommonDataMapper(
-        PrivacyMapper privacyMapper)
+    public ProjectCommonDataMapper(PrivacyMapper privacyMapper)
     {
         this.privacyMapper = privacyMapper;
     }
