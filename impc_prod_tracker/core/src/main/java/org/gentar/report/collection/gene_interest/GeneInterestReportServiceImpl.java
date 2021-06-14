@@ -39,7 +39,6 @@ public class GeneInterestReportServiceImpl implements GeneInterestReportService
     @Override
     public void generateGeneInterestReport()
     {
-
         processCrisprData();
         processPhenotypingData();
 
@@ -55,7 +54,8 @@ public class GeneInterestReportServiceImpl implements GeneInterestReportService
         saveReport();
     }
 
-    private void processCrisprData() {
+    private void processCrisprData()
+    {
 
         crisprProduction.summariseData();
 
@@ -64,7 +64,8 @@ public class GeneInterestReportServiceImpl implements GeneInterestReportService
         summaryProductionPlanStatusForCrisprGenes = crisprProduction.getGeneIdToProductionPlanStatusMap();
     }
 
-    private void processPhenotypingData() {
+    private void processPhenotypingData()
+    {
 
         phenotyping.summariseData();
 
@@ -73,14 +74,14 @@ public class GeneInterestReportServiceImpl implements GeneInterestReportService
     }
 
 
-    private void saveReport() {
-
+    private void saveReport()
+    {
         String report = assembleReport();
         reportService.saveReport(ReportTypeName.GENE_INTEREST, report);
     }
 
-    private String assembleReport() {
-
+    private String assembleReport()
+    {
         String header = generateReportHeaders();
 
         String report = allGenes
@@ -94,7 +95,8 @@ public class GeneInterestReportServiceImpl implements GeneInterestReportService
 
     }
 
-    private String construcReportRow( Map.Entry<String, String> e ) {
+    private String construcReportRow( Map.Entry<String, String> e )
+    {
         List<String> content = Arrays.asList(
                 e.getValue(),
                 e.getKey(),

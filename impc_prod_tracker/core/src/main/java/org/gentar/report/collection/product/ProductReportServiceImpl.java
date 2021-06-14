@@ -60,12 +60,11 @@ public class ProductReportServiceImpl implements ProductReportService
                         MutationGeneProductProjection::getMutationMin,
                         Collectors.mapping(MutationGeneProductProjection::getMutationCategorizationName, Collectors.toSet())));
 
-//        System.out.println(mpp.stream().collect(Collectors.toSet()));
-        System.out.println(gpsProjectsByGene.get("MIN:000000003530"));
+
 
         reportRows = prepareReport();
 
-        System.out.println(reportRows);
+//        System.out.println(reportRows);
 
         saveReport();
     }
@@ -95,20 +94,52 @@ public class ProductReportServiceImpl implements ProductReportService
     }
 
     private String constructRow(ColonyProductProjection colonyProductProjection) {
-        Optional<MutationGeneProductProjection> mutationInfo = mpp.stream()
-                                .filter(x -> x.getMutationMin() == colonyProductProjection.getMutationMin())
-                                .findFirst();
+//        Optional<MutationGeneProductProjection> mutationInfo = mpp.stream()
+//                                .filter(x -> x.getMutationMin() == colonyProductProjection.getMutationMin())
+//                                .findFirst();
 //        String mutationSymbol = filteredOutcomeMutationMap.get(x.getOutcomeId()).getSymbol();
 //        Gene g = filteredMutationGeneMap.get(filteredOutcomeMutationMap.get(x.getOutcomeId()).getMutationId());
 //        String cohortProductionWorkUnit = x.getCohortProductionWorkUnit() == null ? x.getPhenotypingWorkUnit() : x.getCohortProductionWorkUnit();
-        return  colonyProductProjection.getOutcomeTpo() + "\t" +
-                colonyProductProjection.getMutationMin() + "\t" +
+        return  "IMPC" + "\t" +
+                "marker_symbol" + "\t" +
+                "\t" +
+                "\t" +
+                "mgi_accession_id" + "\t" +
+                "\t" +
+                "\t" +
+                "\t" +
+                "\t" +
+                "\t" +
                 colonyProductProjection.getColonyName() + "\t" +
+                "allele_type" + "\t" + // mutation_categorization_name
+                "allele_name" + "\t" + // mutation_table
+                "\t" +
+                "\t" +
+                "mouse" + "\t" +
+                "\t" +
+                "\t" +
                 colonyProductProjection.getPlanWorkUnitName() + "\t" +
+                "\t" +
+                "TRUE" + "\t" +
+                "type_of_microinjection:Cas9/Crispr" + "\t" +
                 colonyProductProjection.getColonyStatusName() + "\t" +
                 colonyProductProjection.getColonyStatusDate().toString() + "\t" +
+                "\t" +
+                "\t" +
+                "\t" +
+                "\t" +
+                "\t" +
+                "\t" +
+                "\t" +
                 colonyProductProjection.getDistributionNetworkName() + "\t" +
-                colonyProductProjection.getDistributionWorkUnitName() + "\t";
+                "order_links" + "\t" +
+                colonyProductProjection.getDistributionWorkUnitName() + "\t" +
+                "contact_links" + "\t" +
+                "\t" +
+                "\t" +
+                "\t" +
+                "\t" +
+                "\t";
     }
 
     private void saveReport() {

@@ -1,7 +1,5 @@
 package org.gentar.report.collection.product.mutation;
 
-import org.gentar.biology.gene.Gene;
-import org.gentar.biology.mutation.categorizarion.MutationCategorization;
 import org.springframework.beans.factory.annotation.Value;
 
 public interface MutationGeneProductProjection
